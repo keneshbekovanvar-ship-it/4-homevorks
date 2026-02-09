@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список книг</title>
+</head>
+<body>
+    <h1>Список книг</h1>
+
+    <a href="{% url 'book_create' %}">Добавить новую книгу</a>
+
+    <ul>
+        {% for book in books %}
+            <li>
+                <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+                — <a href="{% url 'book_update' book.id %}">Редактировать</a>
+                — <a href="{% url 'book_delete' book.id %}">Удалить</a>
+            </li>
+        {% empty %}
+            <li>Книг пока нет</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

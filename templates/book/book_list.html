@@ -1,11 +1,13 @@
 <h1>Books</h1>
 
+<a href="{% url 'book_create' %}">Добавить книгу</a>
+
 <ul>
 {% for book in books %}
     <li>
-        <a href="{% url 'book_detail' book.id %}">
-            {{ book.title }}
-        </a>
+        <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+        - <a href="{% url 'book_update' book.id %}">Редактировать</a>
+        - <a href="{% url 'book_delete' book.id %}">Удалить</a>
     </li>
 {% endfor %}
 </ul>
