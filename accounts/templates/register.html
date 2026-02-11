@@ -1,0 +1,7 @@
+<h2>Регистрация резюме</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Зарегистрироваться</button>
+</form>
+<a href="/login/">Уже есть аккаунт?</a>
