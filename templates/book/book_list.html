@@ -1,13 +1,38 @@
-<h1>Books</h1>
+<h1>Книги</h1>
 
-<a href="{% url 'book_create' %}">Добавить книгу</a>
+<form method="get">
+    <input type="text" name="q" placeholder="Поиск..." value="{{ request.GET.q }}">
+    <button type="submit">Найти</button>
+</form>
 
-<ul>
+<hr>
+
 {% for book in books %}
-    <li>
-        <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
-        - <a href="{% url 'book_update' book.id %}">Редактировать</a>
-        - <a href="{% url 'book_delete' book.id %}">Удалить</a>
-    </li>
+    <div>
+        <h3>
+            <a href="{% url 'book:book_detail' book.id %}">
+                {{ book.title }}
+            </a>
+        </h3>
+        <p>Автор: {{ book.author }}</p>
+        <p>Цена: {{ book.price }}</p>
+        <p>Просмотров: {{ book.views }}</p>
+    </div>
+    <hr>
+{% empty %}
+    <p>Книги не найдены</p>
 {% endfor %}
-</ul>
+
+<div>
+    {% if page_obj.has_previous %}
+        <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Первая</a>
+        <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Назад</a>
+    {% endif %}
+
+    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Вперед</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Последняя</a>
+    {% endif %}
+</div>

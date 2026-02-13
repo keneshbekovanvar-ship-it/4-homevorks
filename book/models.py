@@ -16,5 +16,8 @@ class Book(models.Model):
     is_published = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+
+    views = models.PositiveIntegerField(default=0)
+
     def __str__(self):
         return self.title

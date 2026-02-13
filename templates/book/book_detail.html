@@ -1,5 +1,10 @@
 <h1>{{ book.title }}</h1>
-<p>{{ book.author }}</p>
-<p>{{ book.description }}</p>
 
-<a href="/books/">Назад</a>
+<p><b>Автор:</b> {{ book.author }}</p>
+<p><b>Описание:</b> {{ book.description }}</p>
+<p><b>Страниц:</b> {{ book.pages }}</p>
+<p><b>Цена:</b> {{ book.price }}</p>
+<p><b>Дата публикации:</b> {{ book.published_date }}</p>
+<p><b>Просмотров:</b> {{ book.views }}</p>
+
+<a href="{% url 'book:book_list' %}">Назад</a>
