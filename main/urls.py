@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.shortcuts import redirect
 
 urlpatterns = [
-    path('', lambda request: redirect('book_list')),
+    path('', lambda request: redirect('book:book_list')),
     path('admin/', admin.site.urls),
     path('books/', include('book.urls')),
     path('', include('accounts.urls')),

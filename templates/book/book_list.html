@@ -1,13 +1,13 @@
 <h1>Книги</h1>
 
 <form method="get">
-    <input type="text" name="q" placeholder="Поиск..." value="{{ request.GET.q }}">
+    <input type="text" name="q" placeholder="Поиск..." value="{{ query }}">
     <button type="submit">Найти</button>
 </form>
 
 <hr>
 
-{% for book in books %}
+{% for book in page_obj %}
     <div>
         <h3>
             <a href="{% url 'book:book_detail' book.id %}">
@@ -25,14 +25,15 @@
 
 <div>
     {% if page_obj.has_previous %}
-        <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Первая</a>
-        <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Назад</a>
+        <a href="?page=1{% if query %}&q={{ query }}{% endif %}">Первая</a>
+        <a href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">Назад</a>
     {% endif %}
 
     Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
 
     {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Вперед</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Последняя</a>
+        <a href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}">Вперед</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}">Последняя</a>
     {% endif %}
 </div>
+
